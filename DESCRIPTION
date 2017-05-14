@@ -1,0 +1,23 @@
+Package: wanderer4melb
+Type: Package
+Title: Shiny App for Wandering Around the Downtown Melbourne 2016
+Version: 0.1.0
+Authors@R: person("Earo", "Wang", email = "earo.wang@gmail.com", role = c("aut", "cre"))
+Description: Shiny app for exploring 2016 Melbourne pedestrian data.
+URL: https://github.com/earowang/wanderer4melb
+BugReports: https://github.com/earowang/wanderer4melb/issues
+Depends:
+    R (>= 2.10)
+Imports: 
+    shiny,
+    plotly,
+    leaflet,
+    sugrrants,
+    dplyr (>= 0.5.0.9000)
+Remotes:
+    tidyverse/dplyr,
+    earowang/sugrrants
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1

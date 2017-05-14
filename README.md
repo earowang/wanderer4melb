@@ -1,2 +1,2 @@
 # wanderer4melb
-A shiny app for wandering in the downtown of Melbourne (2016)
+A shiny app for wandering around the downtown Melbourne (2016)
