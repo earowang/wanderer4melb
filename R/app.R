@@ -204,7 +204,7 @@ lauch_app <- function() {
     })
   }
 
-  shinyApp(ui, server, options = list(display.mode = "showcase"))
+  shinyApp(ui, server)
   
 }
 
