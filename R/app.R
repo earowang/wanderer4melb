@@ -80,7 +80,8 @@ lauch_app <- function() {
       ped_cal_data <- ped_cal
       ped_cal_breaks <- attr(ped_cal, "breaks")
       ped_cal_labels <- attr(ped_cal, "mlabel")
-      return(list(ped_cal_data, ped_cal_breaks, ped_cal_labels))
+      ped_cal_dlabels <- attr(ped_cal, "dlabel")
+      return(list(ped_cal_data, ped_cal_breaks, ped_cal_labels, ped_cal_dlabels))
     })
 
     output$calendar <- renderPlotly({
@@ -103,6 +104,10 @@ lauch_app <- function() {
         add_markers(color = I("#3182bd"), size = I(0.1), key = ~ ped_key) %>% 
         add_text(
           x = ~ x, y = ~ y, text = ~ label, data = select_data()[[3]],
+          color = I("black")
+        ) %>% 
+        add_text(
+          x = ~ x, y = ~ y, text = ~ label, data = select_data()[[4]],
           color = I("black")
         )
       d <- event_data("plotly_click", source = "calendar")
