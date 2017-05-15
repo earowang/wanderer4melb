@@ -51,11 +51,11 @@ lauch_app <- function() {
       sensor_id <- sensor_id[length(sensor_id)] # keep the last selected sensor
       if (!is.null(sensor_id)) {
         sub_data <- ped_loc %>% 
-          filter(Sensor_ID == sensor_id)
-        leafletProxy("melb_map", data = sub_data) %>%
+          mutate(color = if_else(Sensor_ID == sensor_id, "red", "#3182bd"))
+        leafletProxy("melb_map", session) %>%
           addCircleMarkers(
-            ~ Longitude, ~ Latitude, layerId = ~ Sensor_ID,
-            color = I("red"), label = ~ Sensor_Name,
+            sub_data$Longitude, sub_data$Latitude, layerId = sub_data$Sensor_ID,
+            color = sub_data$color, label = sub_data$Sensor_Name,
             stroke = TRUE, radius = 8, fillOpacity = 0.5
           )
       }
