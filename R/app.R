@@ -26,7 +26,18 @@ lauch_app <- function() {
       column(
         width = 7,
         # h4("Calendar plot"),
-        plotlyOutput("calendar", height = 850)
+        plotlyOutput("calendar", height = 850),
+        column(
+          width = 3
+        ),
+        column(
+          width = 2,
+          checkboxInput("polar", label = "Polar Coord", value = FALSE)
+        ),
+        column(
+          width = 2,
+          checkboxInput("sunday", label = "Sunday", value = FALSE)
+        )
       )
     )
   )
@@ -68,20 +79,21 @@ lauch_app <- function() {
         ped_cal <- ped %>% 
           filter(Sensor_ID == sensor_id) %>% 
           frame_calendar(
-            x = Time, y = Hourly_Counts, date = Date, nrow = 3, ncol = 4
+            x = Time, y = Hourly_Counts, date = Date, nrow = 3, ncol = 4,
+            polar = input$polar, sunday = input$sunday
           )
       } else {
         ped_cal <- ped %>% 
           filter(Sensor_ID == 13) %>% 
           frame_calendar(
-            x = Time, y = Hourly_Counts, date = Date, nrow = 3, ncol = 4
+            x = Time, y = Hourly_Counts, date = Date, nrow = 3, ncol = 4,
+            polar = input$polar, sunday = input$sunday
           )
       }
       ped_cal_data <- ped_cal
-      ped_cal_breaks <- attr(ped_cal, "breaks")
       ped_cal_labels <- attr(ped_cal, "mlabel")
       ped_cal_dlabels <- attr(ped_cal, "dlabel")
-      return(list(ped_cal_data, ped_cal_breaks, ped_cal_labels, ped_cal_dlabels))
+      return(list(ped_cal_data, ped_cal_labels, ped_cal_dlabels))
     })
 
     output$calendar <- renderPlotly({
@@ -100,21 +112,21 @@ lauch_app <- function() {
           ),
           source = "calendar"
         ) %>% 
-        add_lines(color = I("#3182bd")) %>% 
+        add_paths(color = I("#3182bd")) %>% 
         add_markers(color = I("#3182bd"), size = I(0.1), key = ~ ped_key) %>% 
         add_text(
-          x = ~ x, y = ~ y, text = ~ label, data = select_data()[[3]],
+          x = ~ x, y = ~ y, text = ~ label, data = select_data()[[2]],
           color = I("black")
         ) %>% 
         add_text(
-          x = ~ x, y = ~ y, text = ~ label, data = select_data()[[4]],
+          x = ~ x, y = ~ y, text = ~ label, data = select_data()[[3]],
           color = I("black")
         )
       d <- event_data("plotly_click", source = "calendar")
       if (!is.null(d)) {
         hl_point <- cal_dat[ped_key %in% d[["key"]], "Date"] 
         hl_day <- cal_dat %>% filter(Date == hl_point)
-        cal_plot <- add_lines(cal_plot, data = hl_day, color = I("#d73027"))
+        cal_plot <- add_paths(cal_plot, data = hl_day, color = I("#d73027"))
       }
       layout(cal_plot, showlegend = FALSE, xaxis = a, yaxis = a)
     })
