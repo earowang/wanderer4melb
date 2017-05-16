@@ -31,6 +31,10 @@ lauch_app <- function() {
           width = 3
         ),
         column(
+          width = 3,
+          h4("calendar options:")
+        ),
+        column(
           width = 2,
           checkboxInput("polar", label = "Polar Coord", value = FALSE)
         ),
