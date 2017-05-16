@@ -2,9 +2,9 @@
 #' 
 #' @export
 #' @examples \dontrun{
-#' launchApp()
+#'    launch_app()
 #' }
-lauch_app <- function() {
+launch_app <- function() {
   a <- list(
     title = "",
     zeroline = FALSE,
