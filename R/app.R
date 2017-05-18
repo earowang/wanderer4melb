@@ -117,7 +117,7 @@ launch_app <- function() {
         add_paths(color = I("#3182bd")) %>% 
         add_markers(color = I("#3182bd"), size = I(0.1), key = ~ ped_key) %>% 
         add_text(
-          x = ~ x, y = ~ y, text = ~ label, data = select_data()[[2]],
+          x = ~ x, y = ~ y + 0.03, text = ~ label, data = select_data()[[2]],
           color = I("black")
         ) %>% 
         add_text(
