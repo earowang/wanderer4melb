@@ -28,10 +28,8 @@ launch_app <- function() {
         # h4("Calendar plot"),
         plotlyOutput("calendar", height = 850),
         column(
-          width = 3
-        ),
-        column(
           width = 3,
+          offset = 3,
           h4("calendar options:")
         ),
         column(
