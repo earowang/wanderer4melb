@@ -15,7 +15,6 @@ Imports:
     sugrrants,
     dplyr (>= 0.5.0.9000)
 Remotes:
-    tidyverse/dplyr,
     earowang/sugrrants
 License: MIT + file LICENSE
 Encoding: UTF-8
