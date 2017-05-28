@@ -19,7 +19,12 @@ By doing so, the development versions of [tidyverse/dplyr](https://github.com/ti
 
 ## Demo
 
-`wanderer4melb::launch_app()` launches the shiny app with a viewer in RStudio or a browser from R.
+```r
+library(wanderer4melb)
+launch_app()
+```
+
+The snippet above launches the shiny app with a viewer in RStudio or a browser from R.
 
 A gif showing the app in action:
 
