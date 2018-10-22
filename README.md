@@ -1,10 +1,6 @@
 # wanderer4melb
 
-A shiny app for visualising Melbourne pedestrian and weather data in 2016.
-
-## Inspiration
-
-Would weather affect the number of people wandering around the city of Melbourne?
+Would weather affect the number of people wandering around the city of Melbourne? A shiny app for visualising Melbourne pedestrian and weather data in 2016.
 
 ## Installation
 
@@ -14,8 +10,6 @@ You could install the shiny app using:
 # install.packages("devtools")
 devtools::install_github("earowang/wanderer4melb")
 ```
-
-By doing so, the development versions of [tidyverse/dplyr](https://github.com/tidyverse/dplyr) and [earowang/sugrrants](https://github.com/earowang/sugrrants) will be installed to enable the full functionality. The `dplyr` dev currently provides tidy evaluation in conjunction with `rlang`, and `sugrrants` (under development) helps to generate the calendar display used for the shiny app. 
 
 ## Demo
 
