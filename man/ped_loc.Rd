@@ -6,16 +6,16 @@
 \title{Pedestrian sensor locations in the city of Melbourne 2016}
 \format{A data frame with 43 rows and 4 variables:
 \describe{
-  \item{Sensor_ID}{Sensor identifiers}
-  \item{Sensor_Name}{Sensor names}
-  \item{Latitude}{Sensor latitude}
-  \item{Longitude}{Sensor longitude}
+\item{Sensor_ID}{Sensor identifiers}
+\item{Sensor_Name}{Sensor names}
+\item{Latitude}{Sensor latitude}
+\item{Longitude}{Sensor longitude}
 }}
 \usage{
 ped_loc
 }
 \description{
-A dataset containing the pedestrian sensor locations in the city of Melbourne. 
+A dataset containing the pedestrian sensor locations in the city of Melbourne.
 The variables are as follows:
 }
 \examples{

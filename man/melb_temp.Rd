@@ -6,17 +6,17 @@
 \title{Daily temperature recorded in Melbourne}
 \format{A data frame with 366 rows and 5 variables:
 \describe{
-  \item{date}{Date of 2016}
-  \item{upper16}{Daily high at Melbourne Airport}
-  \item{lower16}{Daily low at Melbourne Airport}
-  \item{lower}{Daily historical low from 1947 to 2014 recored at Melbourne Regional Office}
-  \item{upper}{Daily historical high from 1947 to 2014 recored at Melbourne Regional Office}
+\item{date}{Date of 2016}
+\item{upper16}{Daily high at Melbourne Airport}
+\item{lower16}{Daily low at Melbourne Airport}
+\item{lower}{Daily historical low from 1947 to 2014 recored at Melbourne Regional Office}
+\item{upper}{Daily historical high from 1947 to 2014 recored at Melbourne Regional Office}
 }}
 \usage{
 melb_temp
 }
 \description{
-A dataset containing daily temperatures in Melbourne. The variables are as 
+A dataset containing daily temperatures in Melbourne. The variables are as
 follows:
 }
 \examples{

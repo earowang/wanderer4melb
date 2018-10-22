@@ -6,19 +6,19 @@
 \title{Hourly pedestrian counts in the city of Melbourne 2016}
 \format{A data frame with 361,087 rows and 13 variables:
 \describe{
-  \item{Date_Time}{Date time in 2016}
-  \item{Year}{Year component of Date_Time}
-  \item{Month}{Month component of Date_Time}
-  \item{Mdate}{Day component of Date_Time}
-  \item{Day}{Weekday component of Date_Time}
-  \item{Time}{Hour component of Date_Time}
-  \item{Sensor_ID}{Sensor identifiers}
-  \item{Sensor_Name}{Sensor names}
-  \item{Hourly_Counts}{Pedestrian Counts at hourly intervals}
-  \item{Date}{Date component of Date_Time}
-  \item{Latitude}{Sensor latitude}
-  \item{Longitude}{Sensor longitude}
-  \item{Holiday}{Public holiday}
+\item{Date_Time}{Date time in 2016}
+\item{Year}{Year component of Date_Time}
+\item{Month}{Month component of Date_Time}
+\item{Mdate}{Day component of Date_Time}
+\item{Day}{Weekday component of Date_Time}
+\item{Time}{Hour component of Date_Time}
+\item{Sensor_ID}{Sensor identifiers}
+\item{Sensor_Name}{Sensor names}
+\item{Hourly_Counts}{Pedestrian Counts at hourly intervals}
+\item{Date}{Date component of Date_Time}
+\item{Latitude}{Sensor latitude}
+\item{Longitude}{Sensor longitude}
+\item{Holiday}{Public holiday}
 }}
 \usage{
 ped

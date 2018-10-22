@@ -6,14 +6,14 @@
 \title{Monthly cumulative precipitation recorded in Melbourne}
 \format{A data frame with 366 rows and 2 variables:
 \describe{
-  \item{date}{Date of 2016}
-  \item{prcp}{Monthly cumulative precipitation}
+\item{date}{Date of 2016}
+\item{prcp}{Monthly cumulative precipitation}
 }}
 \usage{
 melb_prcp
 }
 \description{
-A dataset containing daily precipitations in Melbourne 2016. The variables 
+A dataset containing daily precipitations in Melbourne 2016. The variables
 are as follows:
 }
 \examples{

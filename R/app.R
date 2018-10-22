@@ -5,15 +5,6 @@
 #'    launch_app()
 #' }
 launch_app <- function() {
-  a <- list(
-    title = "",
-    zeroline = FALSE,
-    autotick = FALSE,
-    showticklabels = FALSE,
-    showline = FALSE,
-    showgrid = FALSE
-  )
-
   ui <- fluidPage(
     title = "Foot traffic in Melbourne",
     fluidRow(
@@ -93,19 +84,16 @@ launch_app <- function() {
             polar = input$polar, sunday = input$sunday
           )
       }
-      ped_cal_data <- ped_cal
-      ped_cal_labels <- attr(ped_cal, "mlabel")
-      ped_cal_dlabels <- attr(ped_cal, "dlabel")
-      return(list(ped_cal_data, ped_cal_labels, ped_cal_dlabels))
+      ped_cal
     })
 
     output$calendar <- renderPlotly({
-      cal_dat <- select_data()[[1]]
+      cal_dat <- select_data()
       ped_key <- row.names(cal_dat)
-      cal_plot <- cal_dat %>%
-        group_by(.group_id) %>%
+      cal_plotly <- cal_dat %>%
+        group_by(Date) %>%
         plot_ly(
-          x = ~ .x, y = ~ .y,
+          x = ~ .Time, y = ~ .Hourly_Counts,
           hoverinfo = "text",
           text = ~ paste(
             "Sensor: ", Sensor_Name,
@@ -116,26 +104,19 @@ launch_app <- function() {
           source = "calendar"
         ) %>%
         add_paths(color = I("#3182bd")) %>%
-        add_markers(color = I("#3182bd"), size = I(0.1), key = ~ ped_key) %>%
-        add_text(
-          x = ~ x, y = ~ y + 0.03, text = ~ label, data = select_data()[[2]],
-          color = I("black")
-        ) %>%
-        add_text(
-          x = ~ x, y = ~ y, text = ~ label, data = select_data()[[3]],
-          color = I("black")
-        )
+        add_markers(color = I("#3182bd"), size = I(0.1), key = ~ ped_key)
+      cal_plot <- prettify(cal_plotly)
       d <- event_data("plotly_click", source = "calendar")
       if (!is.null(d)) {
         hl_point <- cal_dat[ped_key %in% d[["key"]], "Date"]
-        hl_day <- cal_dat %>% filter(Date == hl_point)
+        hl_day <- cal_dat %>% filter(Date %in% hl_point)
         cal_plot <- add_paths(cal_plot, data = hl_day, color = I("#d73027"))
       }
-      layout(cal_plot, showlegend = FALSE, xaxis = a, yaxis = a)
+      layout(cal_plot, showlegend = FALSE)
     })
 
     output$weather <- renderPlotly({
-      cal_dat <- select_data()[[1]]
+      cal_dat <- select_data()
       ped_key <- row.names(cal_dat)
       d <- event_data("plotly_click", source = "calendar")
       p_temp <- melb_temp %>%
@@ -159,7 +140,7 @@ launch_app <- function() {
         )
       if (!is.null(d)) {
         hl_point <- cal_dat[ped_key %in% d[["key"]], "Date"]
-        hl_day <- melb_temp %>% filter(date == hl_point)
+        hl_day <- melb_temp %>% filter(date %in% hl_point)
         p_temp <- add_segments(
           p_temp, data = hl_day, color = I("#d73027"), size = I(3),
           hoverinfo = "text",
@@ -189,7 +170,7 @@ launch_app <- function() {
         add_ribbons(ymin = I(0), ymax = ~ prcp, color = I("#3182bd"))
       if (!is.null(d)) {
         hl_point <- cal_dat[ped_key %in% d[["key"]], "Date"]
-        hl_day <- melb_prcp %>% filter(date == hl_point)
+        hl_day <- melb_prcp %>% filter(date %in% hl_point)
         p_prcp <- add_markers(p_prcp, data = hl_day, color = I("#d73027"))
       }
       p_prcp <- layout(
