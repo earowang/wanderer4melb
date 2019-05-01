@@ -6,7 +6,7 @@
 #' }
 launch_app <- function() {
   ui <- fluidPage(
-    title = "Foot traffic in Melbourne",
+    titlePanel("Foot traffic in Melbourne"),
     fluidRow(
       column(
         width = 5,
@@ -31,6 +31,18 @@ launch_app <- function() {
           width = 2,
           checkboxInput("sunday", label = "Sunday", value = FALSE)
         )
+      )
+    ),
+    fluidRow(
+      column(
+        width = 12,
+        textOutput("app_desc"),
+        tags$head(tags$style(
+          "#app_desc {
+            color: #de2d26;
+            font-size: 20px;
+          }"
+        ))
       )
     )
   )
@@ -69,19 +81,20 @@ launch_app <- function() {
     select_data <- reactive({
       sensor_id <- input$melb_map_marker_click$id
       sensor_id <- sensor_id[length(sensor_id)] # keep the last selected sensor
+      week_start <- if (input$sunday) 7 else 1
       if (!is.null(sensor_id)) {
         ped_cal <- ped %>%
           filter(Sensor_ID == sensor_id) %>%
           frame_calendar(
             x = Time, y = Hourly_Counts, date = Date, nrow = 3, ncol = 4,
-            polar = input$polar, sunday = input$sunday
+            polar = input$polar, week_start = week_start
           )
       } else {
         ped_cal <- ped %>%
           filter(Sensor_ID == 13) %>%
           frame_calendar(
             x = Time, y = Hourly_Counts, date = Date, nrow = 3, ncol = 4,
-            polar = input$polar, sunday = input$sunday
+            polar = input$polar, week_start = week_start
           )
       }
       ped_cal
@@ -164,7 +177,7 @@ launch_app <- function() {
           hoverinfo = "text",
           text = ~ paste(
             "Date: ", date,
-            "<br> Precipation: ", prcp
+            "<br> Monthly Cumulative Precipation: ", prcp
           )
         ) %>%
         add_ribbons(ymin = I(0), ymax = ~ prcp, color = I("#3182bd"))
@@ -185,6 +198,9 @@ launch_app <- function() {
         heights = c(0.7, 0.3), shareX = TRUE
       )
     p_weather
+    })
+    output$app_desc <- renderText({
+      "Would weather affect the number of people wandering around the city of Melbourne? This shiny app visualises Melbourne pedestrian and weather data in 2016. The top left map displays the locations of installed sensors in downtown Melbourne. Click the sensor of interest, the corresponding hourly traffic will be updated in the calendar plot on the right panel. The bottom left plots show the daily high and low temperatures, and monthly cumulative precipitation in Melbourne respectively. Selecting a day in the calendar plot will highlight the corresponding day in the weather plots."
     })
   }
 

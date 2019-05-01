@@ -7,8 +7,8 @@ Would weather affect the number of people wandering around the city of Melbourne
 You could install the shiny app using:
 
 ```r
-# install.packages("devtools")
-devtools::install_github("earowang/wanderer4melb")
+# install.packages("remotes")
+remotes::install_github("earowang/wanderer4melb")
 ```
 
 ## Demo
